@@ -1,0 +1,373 @@
+<!DOCTYPE html><html lang="ko" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-bguv2lll"> <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>메타문자와 문자 클래스 - 패턴의 기본 단위 | 파이썬</title><link rel="canonical" href="https://yakimbss26.github.io/yakim-python2/chapter08/"/><link rel="sitemap" href="/yakim-python2/sitemap-index.xml"/><script type="module" src="/yakim-python2/mermaid-init.js"></script><script type="module" src="/yakim-python2/toc-toggle.js"></script><link rel="shortcut icon" href="/yakim-python2/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v5.18.1"/><meta name="generator" content="Starlight v0.34.8"/><meta property="og:title" content="메타문자와 문자 클래스 - 패턴의 기본 단위"/><meta property="og:type" content="article"/><meta property="og:url" content="https://yakimbss26.github.io/yakim-python2/chapter08/"/><meta property="og:locale" content="ko"/><meta property="og:description"/><meta property="og:site_name" content="파이썬"/><meta name="twitter:card" content="summary_large_image"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/yakim-python2/_astro/print.DNXP8c50.css" media="print"><link rel="stylesheet" href="/yakim-python2/_astro/index.BhkyVLz7.css"><script type="module" src="/yakim-python2/_astro/page.B1D-nYk3.js"></script></head> <body class="astro-bguv2lll"> <a href="#_top" class="astro-7q3lir66">콘텐츠로 이동</a>  <div class="page sl-flex astro-vrdttmbt"> <header class="header astro-vrdttmbt"><div class="header astro-kmkmnagf"> <div class="title-wrapper sl-flex astro-kmkmnagf"> <a href="/yakim-python2/" class="site-title sl-flex astro-m46x6ez3">  <span class="astro-m46x6ez3" translate="no"> 파이썬 </span> </a>  </div> <div class="sl-flex print:hidden astro-kmkmnagf"> <site-search class="astro-kmkmnagf astro-v37mnknz" data-translations="{&#34;placeholder&#34;:&#34;검색&#34;}"> <button data-open-modal disabled aria-label="검색" aria-keyshortcuts="Control+K" class="astro-v37mnknz"> <svg aria-hidden="true" class="astro-v37mnknz astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg> <span class="sl-hidden md:sl-block astro-v37mnknz" aria-hidden="true">검색</span> <kbd class="sl-hidden md:sl-flex astro-v37mnknz" style="display: none;"> <kbd class="astro-v37mnknz">Ctrl</kbd><kbd class="astro-v37mnknz">K</kbd> </kbd> </button> <dialog style="padding:0" aria-label="검색" class="astro-v37mnknz"> <div class="dialog-frame sl-flex astro-v37mnknz">  <button data-close-modal class="sl-flex md:sl-hidden astro-v37mnknz"> 취소 </button> <div class="search-container astro-v37mnknz"> <div id="starlight__search" class="astro-v37mnknz"></div> </div> </div> </dialog> </site-search>  <script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script> <script type="module" src="/yakim-python2/_astro/Search.astro_astro_type_script_index_0_lang.Boa5MSf8.js"></script>   </div> <div class="sl-hidden md:sl-flex print:hidden right-group astro-kmkmnagf"> <div class="sl-flex social-icons astro-kmkmnagf">  </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">테마 선택</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> <select value="auto" autocomplete="off" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">어두운 테마</option><option value="light" class="astro-4yphtoen">밝은 테마</option><option value="auto" selected class="astro-4yphtoen">자동</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg> </label>  </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script> <script type="module">const r="starlight-theme",o=e=>e==="auto"||e==="dark"||e==="light"?e:"auto",c=()=>o(typeof localStorage<"u"&&localStorage.getItem(r));function n(e){typeof localStorage<"u"&&localStorage.setItem(r,e==="light"||e==="dark"?e:"")}const l=()=>matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";function t(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e==="auto"?l():e,n(e)}matchMedia("(prefers-color-scheme: light)").addEventListener("change",()=>{c()==="auto"&&t("auto")});class s extends HTMLElement{constructor(){super(),t(c()),this.querySelector("select")?.addEventListener("change",a=>{a.currentTarget instanceof HTMLSelectElement&&t(o(a.currentTarget.value))})}}customElements.define("starlight-theme-select",s);</script> <script type="module">class s extends HTMLElement{constructor(){super();const e=this.querySelector("select");e&&(e.addEventListener("change",t=>{t.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=t.currentTarget.value)}),window.addEventListener("pageshow",t=>{if(!t.persisted)return;const n=e.querySelector("option[selected]")?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}}customElements.define("starlight-lang-select",s);</script> </div> </div> </header> <nav class="sidebar print:hidden astro-vrdttmbt" aria-label="메인"> <starlight-menu-button class="print:hidden astro-jif73yzw"> <button aria-expanded="false" aria-label="메뉴" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-jif73yzw"> <svg aria-hidden="true" class="open-menu astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg> <svg aria-hidden="true" class="close-menu astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg> </button> </starlight-menu-button> <script type="module">class s extends HTMLElement{constructor(){super(),this.btn=this.querySelector("button"),this.btn.addEventListener("click",()=>this.toggleExpanded());const t=this.closest("nav");t&&t.addEventListener("keyup",e=>this.closeOnEscape(e))}setExpanded(t){this.setAttribute("aria-expanded",String(t)),document.body.toggleAttribute("data-mobile-menu-expanded",t)}toggleExpanded(){this.setExpanded(this.getAttribute("aria-expanded")!=="true")}closeOnEscape(t){t.code==="Escape"&&(this.setExpanded(!1),this.btn.focus())}}customElements.define("starlight-menu-button",s);</script>   <div id="starlight__sidebar" class="sidebar-pane astro-vrdttmbt"> <div class="sidebar-content sl-flex astro-vrdttmbt"> <sl-sidebar-state-persist data-hash="1vayvde" class="astro-kku4brbg"> <script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script>  <ul class="top-level astro-3ii7xxms"> <li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <sl-sidebar-restore data-index="0"></sl-sidebar-restore> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Part 1. 클래스 - 객체지향의 기초부터 활용까지</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter01/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">왜 클래스가 필요한가 - 객체지향의 출발점</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter02/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">클래스 정의와 인스턴스 생성 - 첫 번째 객체 만들기</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter03/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">메서드와 self - 객체에 행동 부여하기</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter04/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">클래스 변수와 인스턴스 변수 - 공유와 개별의 구분</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter05/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">상속과 메서드 오버라이딩 - 클래스 확장하기</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter06/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">특수 메서드와 종합 실습 - 클래스 완성하기</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <sl-sidebar-restore data-index="1"></sl-sidebar-restore> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Part 2. 정규표현식 - 문자열 패턴 매칭의 기술</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter07/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">왜 정규표현식인가 - 문자열 처리의 강력한 도구</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter08/" aria-current="page" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">메타문자와 문자 클래스 - 패턴의 기본 단위</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter09/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">수량자 - 반복 패턴 표현하기</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter10/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">그룹화와 캡처 - 패턴의 일부 추출하기</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter11/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">치환과 분리 - 문자열 가공하기</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/yakim-python2/chapter12/" aria-current="false" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">종합 실전 문제 - 정규표현식 마스터하기</span>  </a> </li> </ul>  </details> </li> </ul>   <script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script> </sl-sidebar-state-persist>  <div class="md:sl-hidden"> <div class="mobile-preferences sl-flex astro-wu23bvmt"> <div class="social-icons astro-wu23bvmt">  </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">테마 선택</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> <select value="auto" autocomplete="off" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">어두운 테마</option><option value="light" class="astro-4yphtoen">밝은 테마</option><option value="auto" selected class="astro-4yphtoen">자동</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg> </label>  </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script>   </div>  </div> </div> </div> </nav> <div class="main-frame astro-vrdttmbt">  <script type="module">const a=document.getElementById("starlight__sidebar"),n=a?.querySelector("sl-sidebar-state-persist"),o="sl-sidebar-state",i=()=>{let t=[];const e=n?.dataset.hash||"";try{const s=sessionStorage.getItem(o),r=JSON.parse(s||"{}");Array.isArray(r.open)&&r.hash===e&&(t=r.open)}catch{}return{hash:e,open:t,scroll:a?.scrollTop||0}},c=t=>{try{sessionStorage.setItem(o,JSON.stringify(t))}catch{}},d=()=>c(i()),l=(t,e)=>{const s=i();s.open[e]=t,c(s)};n?.addEventListener("click",t=>{if(!(t.target instanceof Element))return;const e=t.target.closest("summary")?.closest("details");if(!e)return;const s=e.querySelector("sl-sidebar-restore"),r=parseInt(s?.dataset.index||"");isNaN(r)||l(!e.open,r)});addEventListener("visibilitychange",()=>{document.visibilityState==="hidden"&&d()});addEventListener("pageHide",d);</script> <div class="lg:sl-flex astro-67yu43on"> <aside class="right-sidebar-container print:hidden astro-67yu43on"> <div class="right-sidebar astro-67yu43on"> <script type="module" src="/yakim-python2/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C181hMzK.js"></script><script type="module" src="/yakim-python2/_astro/TableOfContents.astro_astro_type_script_index_0_lang.CKWWgpjV.js"></script><div class="lg:sl-hidden astro-pb3aqygn"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-doynk5tl"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-doynk5tl"><details id="starlight__mobile-toc" class="astro-doynk5tl"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-doynk5tl"><div class="toggle sl-flex astro-doynk5tl">목차<svg aria-hidden="true" class="caret astro-doynk5tl astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></div><span class="display-current astro-doynk5tl"></span></summary><div class="dropdown astro-doynk5tl"><ul class="isMobile astro-g2bywc46" style="--depth: 0;"> <li class="astro-g2bywc46" style="--depth: 0;"> <a href="#_top" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">개요</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-이-장을-시작하기-전에" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🚀 이 장을 시작하기 전에</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-이-장의-학습-목표" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🎯 이 장의 학습 목표</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-미리-확인해요" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🔑 미리 확인해요</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-핵심-개념" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">📚 핵심 개념</span> </a> <ul class="isMobile astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#개념-1-메타문자--특별한-의미를-가진-문자들" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">개념 1: 메타문자 — 특별한 의미를 가진 문자들</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#개념-2-문자-클래스---원하는-문자만-골라-담기" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">개념 2: 문자 클래스 [] — 원하는 문자만 골라 담기</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#개념-3-단축-표현-d-w-s--자주-쓰는-클래스의-별명" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">개념 3: 단축 표현 \d, \w, \s — 자주 쓰는 클래스의 별명</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-직접-해봐요" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🔧 직접 해봐요</span> </a> <ul class="isMobile astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#실습-이메일에서-아이디-부분만-뽑아내기" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">실습: 이메일에서 아이디 부분만 뽑아내기</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-자주-묻는-질문--막혔을-때" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">❓ 자주 묻는 질문 &amp; 막혔을 때</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-이-장에서-배운-것-정리" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">📌 이 장에서 배운 것 정리</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-스스로-점검해봐요" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🤔 스스로 점검해봐요</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-다음-장-미리보기" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🚀 다음 장 미리보기</span> </a>  </li> </ul> </div></details></nav></mobile-starlight-toc></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-pb3aqygn"><div class="sl-container astro-pb3aqygn"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">목차</h2><ul class="astro-g2bywc46" style="--depth: 0;"> <li class="astro-g2bywc46" style="--depth: 0;"> <a href="#_top" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">개요</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-이-장을-시작하기-전에" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🚀 이 장을 시작하기 전에</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-이-장의-학습-목표" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🎯 이 장의 학습 목표</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-미리-확인해요" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🔑 미리 확인해요</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-핵심-개념" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">📚 핵심 개념</span> </a> <ul class="astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#개념-1-메타문자--특별한-의미를-가진-문자들" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">개념 1: 메타문자 — 특별한 의미를 가진 문자들</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#개념-2-문자-클래스---원하는-문자만-골라-담기" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">개념 2: 문자 클래스 [] — 원하는 문자만 골라 담기</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#개념-3-단축-표현-d-w-s--자주-쓰는-클래스의-별명" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">개념 3: 단축 표현 \d, \w, \s — 자주 쓰는 클래스의 별명</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-직접-해봐요" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🔧 직접 해봐요</span> </a> <ul class="astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#실습-이메일에서-아이디-부분만-뽑아내기" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">실습: 이메일에서 아이디 부분만 뽑아내기</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-자주-묻는-질문--막혔을-때" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">❓ 자주 묻는 질문 &amp; 막혔을 때</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-이-장에서-배운-것-정리" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">📌 이 장에서 배운 것 정리</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-스스로-점검해봐요" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🤔 스스로 점검해봐요</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#-다음-장-미리보기" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">🚀 다음 장 미리보기</span> </a>  </li> </ul> </nav></starlight-toc></div></div> </div> </aside> <div class="main-pane astro-67yu43on">  <main data-pagefind-body class="astro-bguv2lll" lang="ko" dir="ltr">    <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <h1 id="_top" class="astro-j6tvhyss">메타문자와 문자 클래스 - 패턴의 기본 단위</h1>  </div> </div>  <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <div class="sl-markdown-content"> <hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="-이-장을-시작하기-전에">🚀 이 장을 시작하기 전에</h2><a class="sl-anchor-link" href="#-이-장을-시작하기-전에"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “🚀 이 장을 시작하기 전에”</span></a></div>
+<p>이메일 주소에서 <code dir="auto">@</code> 앞부분만 뽑아내거나, 전화번호 형식이 맞는지 확인하거나, 로그 파일에서 숫자로 된 에러 코드만 골라내야 할 때가 있어요. 이 모든 작업의 핵심은 <strong>“어떤 문자를 찾을 것인가”를 패턴으로 표현하는 것</strong>입니다. 메타문자와 문자 클래스는 바로 그 패턴의 기본 재료예요.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="-이-장의-학습-목표">🎯 이 장의 학습 목표</h2><a class="sl-anchor-link" href="#-이-장의-학습-목표"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “🎯 이 장의 학습 목표”</span></a></div>
+<p>이 장을 마치면 여러분은:</p>
+<ul>
+<li>✅ <code dir="auto">.</code>, <code dir="auto">^</code>, <code dir="auto">$</code> 등 주요 메타문자의 의미를 설명할 수 있습니다</li>
+<li>✅ <code dir="auto">[]</code> 문자 클래스로 특정 문자 집합을 표현할 수 있습니다</li>
+<li>✅ <code dir="auto">\d</code>, <code dir="auto">\w</code>, <code dir="auto">\s</code> 등 단축 표현을 바로 활용할 수 있습니다</li>
+</ul>
+<p>⏰ 예상 학습 시간: 약 10분</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="-미리-확인해요">🔑 미리 확인해요</h2><a class="sl-anchor-link" href="#-미리-확인해요"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “🔑 미리 확인해요”</span></a></div>
+<p>지난 장에서 <code dir="auto">re.search(패턴, 문자열)</code>로 패턴을 찾는 방법을 배웠어요. 기억나시나요? 이번 장은 그 <strong>“패턴”</strong> 자리에 무엇을 어떻게 쓰는지 배웁니다.</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="-핵심-개념">📚 핵심 개념</h2><a class="sl-anchor-link" href="#-핵심-개념"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “📚 핵심 개념”</span></a></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="개념-1-메타문자--특별한-의미를-가진-문자들">개념 1: 메타문자 — 특별한 의미를 가진 문자들</h3><a class="sl-anchor-link" href="#개념-1-메타문자--특별한-의미를-가진-문자들"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “개념 1: 메타문자 — 특별한 의미를 가진 문자들”</span></a></div>
+<p>정규표현식에는 <strong>글자 자체가 아닌 특별한 규칙을 뜻하는 문자</strong>들이 있어요. 이를 <strong>메타문자(metacharacter)</strong>라고 합니다.</p>
+<p>예를 들어 <code dir="auto">.</code>은 “어떤 문자든 딱 하나”를 의미해요. 마치 카드 게임의 조커(와일드카드)처럼요.</p>
+<p>자주 쓰는 메타문자를 표로 정리했어요:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>메타문자</th><th>의미</th><th>예시 패턴</th><th>매칭되는 문자열 예</th></tr></thead><tbody><tr><td><code dir="auto">.</code></td><td>아무 문자 하나 (줄바꿈 제외)</td><td><code dir="auto">a.c</code></td><td><code dir="auto">abc</code>, <code dir="auto">a1c</code>, <code dir="auto">a_c</code></td></tr><tr><td><code dir="auto">^</code></td><td>문자열의 시작</td><td><code dir="auto">^Hello</code></td><td><code dir="auto">Hello world</code> (앞에 있을 때만)</td></tr><tr><td><code dir="auto">$</code></td><td>문자열의 끝</td><td><code dir="auto">end$</code></td><td><code dir="auto">the end</code> (뒤에 있을 때만)</td></tr><tr><td><code dir="auto">\</code></td><td>다음 문자를 이스케이프</td><td><code dir="auto">\.</code></td><td><code dir="auto">.</code> 자체 (점 문자)</td></tr></tbody></table>
+<p>아래 코드로 직접 확인해 보세요.</p>
+<div class="expressive-code"><link rel="stylesheet" href="/yakim-python2/_astro/ec.v4551.css"><script type="module" src="/yakim-python2/_astro/ec.0vx5m.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">import</span><span style="--0:#D6DEEB;--1:#403F53"> re</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5F636F"># . 은 어떤 문자든 한 글자를 대신함</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">search</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">a.c</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">abc</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))   </span><span style="--0:#919F9F;--1:#5F636F"># &#x3C;- . 이 b에 매칭</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">search</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">a.c</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">a1c</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))   </span><span style="--0:#919F9F;--1:#5F636F"># &#x3C;- . 이 1에 매칭</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">search</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">a.c</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">ac</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))    </span><span style="--0:#919F9F;--1:#5F636F"># &#x3C;- 사이 문자가 없으므로 None</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import re# . 은 어떤 문자든 한 글자를 대신함print(re.search(r&#x22;a.c&#x22;, &#x22;abc&#x22;))   # <- . 이 b에 매칭print(re.search(r&#x22;a.c&#x22;, &#x22;a1c&#x22;))   # <- . 이 1에 매칭print(re.search(r&#x22;a.c&#x22;, &#x22;ac&#x22;))    # <- 사이 문자가 없으므로 None"><div></div></button></div></figure></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">&#x3C;re.Match object; span=(0, 3), match='abc'></span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">&#x3C;re.Match object; span=(0, 3), match='a1c'></span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">None</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="<re.Match object; span=(0, 3), match=&#x27;abc&#x27;><re.Match object; span=(0, 3), match=&#x27;a1c&#x27;>None"><div></div></button></div></figure></div>
+<p>3번째 줄 <code dir="auto">re.search(r"a.c", "ac")</code>가 <code dir="auto">None</code>인 이유: <code dir="auto">.</code>은 반드시 <strong>1글자</strong>를 요구하는데, <code dir="auto">ac</code>에는 사이에 아무것도 없기 때문이에요.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">import</span><span style="--0:#D6DEEB;--1:#403F53"> re</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5F636F"># ^ 는 시작, $ 는 끝을 의미함</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">search</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">^Hello</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">Hello world</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))  </span><span style="--0:#919F9F;--1:#5F636F"># 시작이 Hello → 매칭</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">search</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">^Hello</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">Say Hello</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))    </span><span style="--0:#919F9F;--1:#5F636F"># 시작이 Hello가 아님 → None</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">search</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">end$</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">the end</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))        </span><span style="--0:#919F9F;--1:#5F636F"># 끝이 end → 매칭</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">search</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">end$</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">ending</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))         </span><span style="--0:#919F9F;--1:#5F636F"># 끝이 end가 아님 → None</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import re# ^ 는 시작, $ 는 끝을 의미함print(re.search(r&#x22;^Hello&#x22;, &#x22;Hello world&#x22;))  # 시작이 Hello → 매칭print(re.search(r&#x22;^Hello&#x22;, &#x22;Say Hello&#x22;))    # 시작이 Hello가 아님 → Noneprint(re.search(r&#x22;end$&#x22;, &#x22;the end&#x22;))        # 끝이 end → 매칭print(re.search(r&#x22;end$&#x22;, &#x22;ending&#x22;))         # 끝이 end가 아님 → None"><div></div></button></div></figure></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">&#x3C;re.Match object; span=(0, 5), match='Hello'></span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">None</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">&#x3C;re.Match object; span=(4, 7), match='end'></span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">None</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="<re.Match object; span=(0, 5), match=&#x27;Hello&#x27;>None<re.Match object; span=(4, 7), match=&#x27;end&#x27;>None"><div></div></button></div></figure></div>
+<blockquote>
+<p>🔍 <strong>체크포인트</strong>: <code dir="auto">.</code>은 “아무 문자 1개”, <code dir="auto">^</code>는 “시작”, <code dir="auto">$</code>는 “끝”을 뜻해요. 이 세 가지를 말로 설명할 수 있으면 다음으로 넘어가세요! 💪</p>
+</blockquote>
+<hr>
+<div class="sl-heading-wrapper level-h3"><h3 id="개념-2-문자-클래스---원하는-문자만-골라-담기">개념 2: 문자 클래스 <code dir="auto">[]</code> — 원하는 문자만 골라 담기</h3><a class="sl-anchor-link" href="#개념-2-문자-클래스---원하는-문자만-골라-담기"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “개념 2: 문자 클래스 [] — 원하는 문자만 골라 담기”</span></a></div>
+<p><strong>문자 클래스</strong>는 <code dir="auto">[</code> 와 <code dir="auto">]</code> 사이에 허용할 문자들을 나열하는 방법이에요.</p>
+<blockquote>
+<p><strong>쉽게 말하면</strong>: <code dir="auto">[abc]</code>는 “a, b, c 중에 딱 하나”를 의미해요. 뷔페에서 원하는 것만 골라 담는 것과 같아요.</p>
+</blockquote>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">import</span><span style="--0:#D6DEEB;--1:#403F53"> re</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5F636F"># [aeiou] : 모음 중 하나와 매칭</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">search</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#82AAFF;--1:#3B61B0">[aeiou]</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">python</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))  </span><span style="--0:#919F9F;--1:#5F636F"># y 다음 o가 매칭</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">findall</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#82AAFF;--1:#3B61B0">[aeiou]</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">python</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">)) </span><span style="--0:#919F9F;--1:#5F636F"># 모든 모음 찾기</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5F636F"># [0-9] : 0부터 9 사이 숫자 하나 (범위 표현)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">findall</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#82AAFF;--1:#3B61B0">[0-9]</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">a1b2c3</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))  </span><span style="--0:#919F9F;--1:#5F636F"># 숫자만 골라냄</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import re# [aeiou] : 모음 중 하나와 매칭print(re.search(r&#x22;[aeiou]&#x22;, &#x22;python&#x22;))  # y 다음 o가 매칭print(re.findall(r&#x22;[aeiou]&#x22;, &#x22;python&#x22;)) # 모든 모음 찾기# [0-9] : 0부터 9 사이 숫자 하나 (범위 표현)print(re.findall(r&#x22;[0-9]&#x22;, &#x22;a1b2c3&#x22;))  # 숫자만 골라냄"><div></div></button></div></figure></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">&#x3C;re.Match object; span=(4, 5), match='o'></span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">['o']</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">['1', '2', '3']</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="<re.Match object; span=(4, 5), match=&#x27;o&#x27;>[&#x27;o&#x27;][&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;]"><div></div></button></div></figure></div>
+<p><code dir="auto">[0-9]</code>처럼 <code dir="auto">-</code>로 <strong>범위</strong>를 표현할 수 있어요. 자주 쓰는 범위:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>표현</th><th>의미</th></tr></thead><tbody><tr><td><code dir="auto">[0-9]</code></td><td>숫자 0부터 9</td></tr><tr><td><code dir="auto">[a-z]</code></td><td>소문자 a부터 z</td></tr><tr><td><code dir="auto">[A-Z]</code></td><td>대문자 A부터 Z</td></tr><tr><td><code dir="auto">[a-zA-Z]</code></td><td>모든 영문자</td></tr><tr><td><code dir="auto">[^abc]</code></td><td>a, b, c <strong>제외</strong>한 나머지</td></tr></tbody></table>
+<p><code dir="auto">[^]</code>의 <code dir="auto">^</code>는 <strong>부정(NOT)</strong> 을 의미해요. 메타문자의 <code dir="auto">^</code>(문자열 시작)와 다르니 주의하세요!</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">import</span><span style="--0:#D6DEEB;--1:#403F53"> re</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5F636F"># [^0-9] : 숫자가 아닌 문자</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">findall</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#82AAFF;--1:#3B61B0">[</span><span style="--0:#7FDBCA;--1:#096E72">^</span><span style="--0:#82AAFF;--1:#3B61B0">0-9]</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">a1b2c3</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))  </span><span style="--0:#919F9F;--1:#5F636F"># 숫자 제외한 나머지</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import re# [^0-9] : 숫자가 아닌 문자print(re.findall(r&#x22;[^0-9]&#x22;, &#x22;a1b2c3&#x22;))  # 숫자 제외한 나머지"><div></div></button></div></figure></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">['a', 'b', 'c']</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]"><div></div></button></div></figure></div>
+<blockquote>
+<p>🔍 <strong>체크포인트</strong>: <code dir="auto">[abc]</code>와 <code dir="auto">[^abc]</code>의 차이를 설명할 수 있으면 완벽해요! 💪</p>
+</blockquote>
+<hr>
+<div class="sl-heading-wrapper level-h3"><h3 id="개념-3-단축-표현-d-w-s--자주-쓰는-클래스의-별명">개념 3: 단축 표현 <code dir="auto">\d</code>, <code dir="auto">\w</code>, <code dir="auto">\s</code> — 자주 쓰는 클래스의 별명</h3><a class="sl-anchor-link" href="#개념-3-단축-표현-d-w-s--자주-쓰는-클래스의-별명"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “개념 3: 단축 표현 \d, \w, \s — 자주 쓰는 클래스의 별명”</span></a></div>
+<p>자주 쓰는 문자 클래스에는 <strong>단축 표현(shorthand)</strong>이 있어요. <code dir="auto">[0-9]</code>를 매번 쓰는 대신 <code dir="auto">\d</code>로 줄여 쓸 수 있어요.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>단축 표현</th><th>의미</th><th>동일한 클래스</th></tr></thead><tbody><tr><td><code dir="auto">\d</code></td><td>숫자</td><td><code dir="auto">[0-9]</code></td></tr><tr><td><code dir="auto">\D</code></td><td>숫자가 아닌 것</td><td><code dir="auto">[^0-9]</code></td></tr><tr><td><code dir="auto">\w</code></td><td>단어 문자 (영문자, 숫자, 밑줄)</td><td><code dir="auto">[a-zA-Z0-9_]</code></td></tr><tr><td><code dir="auto">\W</code></td><td>단어 문자가 아닌 것</td><td><code dir="auto">[^a-zA-Z0-9_]</code></td></tr><tr><td><code dir="auto">\s</code></td><td>공백 (스페이스, 탭, 줄바꿈)</td><td>`[ \t</td></tr><tr><td>\r]`</td><td></td><td></td></tr><tr><td><code dir="auto">\S</code></td><td>공백이 아닌 것</td><td>`[^ \t</td></tr><tr><td>\r]`</td><td></td><td></td></tr></tbody></table>
+<blockquote>
+<p><strong>암기 팁</strong>: 소문자는 “이것”, 대문자는 “이것 아닌 것”이에요. <code dir="auto">\d</code>는 digit(숫자), <code dir="auto">\w</code>는 word(단어), <code dir="auto">\s</code>는 space(공백)의 첫 글자예요.</p>
+</blockquote>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">import</span><span style="--0:#D6DEEB;--1:#403F53"> re</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">text </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">전화번호: 010-1234-5678</span><span style="--0:#D9F5DD;--1:#111111">"</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5F636F"># \d 로 숫자만 골라내기</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">digits </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> re.</span><span style="--0:#B2CCD6;--1:#096E72">findall</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">\d</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> text</span><span style="--0:#D6DEEB;--1:#403F53">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">digits</span><span style="--0:#D6DEEB;--1:#403F53">)</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5F636F"># \w 로 단어 문자만 (한글은 \w에 포함됨)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">words </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> re.</span><span style="--0:#B2CCD6;--1:#096E72">findall</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">\w</span><span style="--0:#7FDBCA;--1:#096E72">+</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> text</span><span style="--0:#D6DEEB;--1:#403F53">)  </span><span style="--0:#919F9F;--1:#5F636F"># + 는 1개 이상 - 다음 장에서 배워요!</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">words</span><span style="--0:#D6DEEB;--1:#403F53">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import retext = &#x22;전화번호: 010-1234-5678&#x22;# \d 로 숫자만 골라내기digits = re.findall(r&#x22;\d&#x22;, text)print(digits)# \w 로 단어 문자만 (한글은 \w에 포함됨)words = re.findall(r&#x22;\w+&#x22;, text)  # + 는 1개 이상 - 다음 장에서 배워요!print(words)"><div></div></button></div></figure></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">['0', '1', '0', '1', '2', '3', '4', '5', '6', '7', '8']</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">['전화번호', '010', '1234', '5678']</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="[&#x27;0&#x27;, &#x27;1&#x27;, &#x27;0&#x27;, &#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;][&#x27;전화번호&#x27;, &#x27;010&#x27;, &#x27;1234&#x27;, &#x27;5678&#x27;]"><div></div></button></div></figure></div>
+<blockquote>
+<p>🔍 <strong>체크포인트</strong>: <code dir="auto">\d</code>, <code dir="auto">\w</code>, <code dir="auto">\s</code>가 각각 무엇을 의미하는지 외울 수 있으면 다음으로! 💪</p>
+</blockquote>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="-직접-해봐요">🔧 직접 해봐요</h2><a class="sl-anchor-link" href="#-직접-해봐요"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “🔧 직접 해봐요”</span></a></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="실습-이메일에서-아이디-부분만-뽑아내기">실습: 이메일에서 아이디 부분만 뽑아내기</h3><a class="sl-anchor-link" href="#실습-이메일에서-아이디-부분만-뽑아내기"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “실습: 이메일에서 아이디 부분만 뽑아내기”</span></a></div>
+<p><strong>목표</strong>: <code dir="auto">user123@gmail.com</code> 에서 <code dir="auto">@</code> 앞의 아이디 부분을 찾아요.</p>
+<p><strong>따라하기</strong>:</p>
+<p><strong>1단계</strong> — 어떤 문자가 아이디에 올 수 있는지 생각해요.
+영문자, 숫자, 밑줄(<code dir="auto">_</code>)이 올 수 있어요. 이건 <code dir="auto">\w</code>와 일치해요!</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">import</span><span style="--0:#D6DEEB;--1:#403F53"> re</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">email </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">user123@gmail.com</span><span style="--0:#D9F5DD;--1:#111111">"</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5F636F"># \w 로 연속된 단어 문자 찾기 (+ 는 1개 이상)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">result </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> re.</span><span style="--0:#B2CCD6;--1:#096E72">findall</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">\w</span><span style="--0:#7FDBCA;--1:#096E72">+</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> email</span><span style="--0:#D6DEEB;--1:#403F53">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">result</span><span style="--0:#D6DEEB;--1:#403F53">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import reemail = &#x22;user123@gmail.com&#x22;# \w 로 연속된 단어 문자 찾기 (+ 는 1개 이상)result = re.findall(r&#x22;\w+&#x22;, email)print(result)"><div></div></button></div></figure></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">['user123', 'gmail', 'com']</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="[&#x27;user123&#x27;, &#x27;gmail&#x27;, &#x27;com&#x27;]"><div></div></button></div></figure></div>
+<blockquote>
+<p>✅ 확인: <code dir="auto">['user123', 'gmail', 'com']</code>이 출력되면 정상이에요.</p>
+</blockquote>
+<p><strong>2단계</strong> — <code dir="auto">@</code> 앞에 있는 것만 정확히 잡으려면 <code dir="auto">^</code>를 활용해요.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">import</span><span style="--0:#D6DEEB;--1:#403F53"> re</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">email </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">user123@gmail.com</span><span style="--0:#D9F5DD;--1:#111111">"</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5F636F"># ^ 로 문자열 시작부터, @ 바로 앞까지만 매칭</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">result </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> re.</span><span style="--0:#B2CCD6;--1:#096E72">search</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#5CA7E4;--1:#3A688F">^\w</span><span style="--0:#7FDBCA;--1:#096E72">+</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> email</span><span style="--0:#D6DEEB;--1:#403F53">)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">result.</span><span style="--0:#B2CCD6;--1:#096E72">group</span><span style="--0:#D6DEEB;--1:#403F53">())  </span><span style="--0:#919F9F;--1:#5F636F"># .group() 은 매칭된 문자열을 꺼냄</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import reemail = &#x22;user123@gmail.com&#x22;# ^ 로 문자열 시작부터, @ 바로 앞까지만 매칭result = re.search(r&#x22;^\w+&#x22;, email)print(result.group())  # .group() 은 매칭된 문자열을 꺼냄"><div></div></button></div></figure></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="plaintext"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">user123</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="user123"><div></div></button></div></figure></div>
+<blockquote>
+<p>✅ 확인: <code dir="auto">user123</code>만 출력되면 완성이에요!
+❓ <code dir="auto">AttributeError: 'NoneType'</code>가 뜨나요? → <code dir="auto">re.search()</code>가 <code dir="auto">None</code>을 반환한 것이에요. 패턴 <code dir="auto">r"^\w+"</code> 앞뒤 따옴표와 <code dir="auto">r</code>을 확인해 보세요.</p>
+</blockquote>
+<p>🎉 잘하셨어요! 메타문자와 단축 표현을 실제로 활용해 봤어요!</p>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="-자주-묻는-질문--막혔을-때">❓ 자주 묻는 질문 &#x26; 막혔을 때</h2><a class="sl-anchor-link" href="#-자주-묻는-질문--막혔을-때"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “❓ 자주 묻는 질문 &#x26; 막혔을 때”</span></a></div>
+<details>
+<summary>Q. 점(.)을 문자 자체로 찾고 싶은데 아무 문자나 매칭돼요</summary>
+<p><code dir="auto">.</code>은 메타문자라서 아무 문자를 의미해요. 점 자체를 찾으려면 <code dir="auto">\.</code>처럼 역슬래시로 이스케이프해야 해요.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">import</span><span style="--0:#D6DEEB;--1:#403F53"> re</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">print</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">re.</span><span style="--0:#B2CCD6;--1:#096E72">findall</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">r</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#F78C6C;--1:#AA0982">\.</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D9F5DD;--1:#111111">,</span><span style="--0:#82AAFF;--1:#3B61B0"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">a.b.c</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">))  </span><span style="--0:#919F9F;--1:#5F636F"># 점만 찾기</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="import reprint(re.findall(r&#x22;\.&#x22;, &#x22;a.b.c&#x22;))  # 점만 찾기"><div></div></button></div></figure></div>
+<p>출력: <code dir="auto">['.', '.']</code></p>
+</details>
+<details>
+<summary>Q. `^`가 시작을 뜻하는지 NOT을 뜻하는지 헷갈려요</summary>
+<p>위치에 따라 달라요:</p>
+<ul>
+<li><code dir="auto">[</code> 밖에 있으면 → 문자열의 <strong>시작</strong> (<code dir="auto">^Hello</code>)</li>
+<li><code dir="auto">[</code> 바로 안에 있으면 → <strong>부정(NOT)</strong> (<code dir="auto">[^0-9]</code>)</li>
+</ul>
+</details>
+<details>
+<summary>Q. 한글은 \w에 포함되나요?</summary>
+<p>Python의 <code dir="auto">re</code> 모듈에서 <code dir="auto">\w</code>는 유니코드 문자를 포함하므로 한글도 매칭돼요. 단, 영문자만 원한다면 <code dir="auto">[a-zA-Z]</code>처럼 명시적으로 쓰세요.</p>
+</details>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="-이-장에서-배운-것-정리">📌 이 장에서 배운 것 정리</h2><a class="sl-anchor-link" href="#-이-장에서-배운-것-정리"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “📌 이 장에서 배운 것 정리”</span></a></div>
+<blockquote>
+<p>🏆 <strong>오늘의 성취</strong>: 정규표현식 패턴의 기본 재료인 메타문자, 문자 클래스, 단축 표현을 모두 익혔어요!</p>
+</blockquote>
+<ul>
+<li>✅ <code dir="auto">.</code>(아무 문자), <code dir="auto">^</code>(시작), <code dir="auto">$</code>(끝) 메타문자의 역할</li>
+<li>✅ <code dir="auto">[abc]</code>로 원하는 문자 집합 지정, <code dir="auto">[^abc]</code>로 제외</li>
+<li>✅ <code dir="auto">\d</code>(숫자), <code dir="auto">\w</code>(단어 문자), <code dir="auto">\s</code>(공백) 단축 표현</li>
+</ul>
+<p><strong>핵심 요약 표</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>표현</th><th>기억법</th><th>의미</th></tr></thead><tbody><tr><td><code dir="auto">.</code></td><td>조커 카드</td><td>아무 문자 하나</td></tr><tr><td><code dir="auto">^</code></td><td>시작점</td><td>문자열의 맨 앞</td></tr><tr><td><code dir="auto">$</code></td><td>끝점</td><td>문자열의 맨 뒤</td></tr><tr><td><code dir="auto">[abc]</code></td><td>뷔페</td><td>a, b, c 중 하나</td></tr><tr><td><code dir="auto">[^abc]</code></td><td>뷔페 제외</td><td>a, b, c 제외 나머지</td></tr><tr><td><code dir="auto">\d</code></td><td>digit</td><td>숫자</td></tr><tr><td><code dir="auto">\w</code></td><td>word</td><td>영문자+숫자+밑줄</td></tr><tr><td><code dir="auto">\s</code></td><td>space</td><td>공백</td></tr></tbody></table>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="-스스로-점검해봐요">🤔 스스로 점검해봐요</h2><a class="sl-anchor-link" href="#-스스로-점검해봐요"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “🤔 스스로 점검해봐요”</span></a></div>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> <code dir="auto">.</code>, <code dir="auto">^</code>, <code dir="auto">$</code>의 차이를 설명할 수 있나요?</li>
+<li class="task-list-item"><input type="checkbox" disabled> <code dir="auto">[0-9]</code>와 <code dir="auto">\d</code>가 같다는 걸 알고 있나요?</li>
+<li class="task-list-item"><input type="checkbox" disabled> <code dir="auto">[^abc]</code>가 무엇을 의미하는지 말할 수 있나요?</li>
+<li class="task-list-item"><input type="checkbox" disabled> 실습 코드를 직접 실행해서 결과를 확인했나요?</li>
+</ul>
+<blockquote>
+<p>💡 체크 못한 항목이 있다면? 해당 개념 부분만 다시 읽어보세요. 한 번에 다 외울 필요 없어요, 표를 옆에 두고 쓰다 보면 자연스럽게 익혀져요!</p>
+</blockquote>
+<hr>
+<div class="sl-heading-wrapper level-h2"><h2 id="-다음-장-미리보기">🚀 다음 장 미리보기</h2><a class="sl-anchor-link" href="#-다음-장-미리보기"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only">섹션 제목: “🚀 다음 장 미리보기”</span></a></div>
+<p>지금까지 “어떤 문자”를 찾는지 배웠어요. 다음 장에서는 “몇 번 반복”을 지정하는 <strong>수량자</strong>(<code dir="auto">*</code>, <code dir="auto">+</code>, <code dir="auto">?</code>, <code dir="auto">{n,m}</code>)를 배워요. <code dir="auto">\d+</code>로 여러 자리 숫자를 한 번에 잡는 방법을 알게 되면, 오늘 배운 내용이 훨씬 강력해져요! 🎯</p> </div> <footer class="sl-flex astro-3yyafb3n"> <div class="meta sl-flex astro-3yyafb3n">   </div> <div class="pagination-links print:hidden astro-u2l5gyhi" dir="ltr"> <a href="/yakim-python2/chapter07/" rel="prev" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg> <span class="astro-u2l5gyhi"> 이전 페이지 <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">왜 정규표현식인가 - 문자열 처리의 강력한 도구</span> </span> </a> <a href="/yakim-python2/chapter09/" rel="next" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg> <span class="astro-u2l5gyhi"> 다음 페이지 <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">수량자 - 반복 패턴 표현하기</span> </span> </a> </div>   </footer>  </div> </div>   </main> </div> </div>  </div> </div>  </body></html>
